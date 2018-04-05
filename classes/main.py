@@ -44,10 +44,14 @@ while running:
         if spell.cost > current_mpoint:
             print(Bcolors.FAIL + "\nNot enough mpoint")
             continue
-
         player.reduce_mpoint(spell.cost)
-        enemy.take_damage(magic_damage)
-        print(Bcolors.OKBLUE + '\n' + spell.name + ' deals', str(magic_damage), 'points of damage' + Bcolors.ENDC)
+
+        if spell.type == 'white':
+            player.heal(magic_damage )
+            print(Bcolors.OKBLUE + '\n' + spell.name + ' heals for', str(magic_damage), 'points of damage' + Bcolors.ENDC)
+        elif spell.type == 'black':
+            enemy.take_damage(magic_damage)
+            print(Bcolors.OKBLUE + '\n' + spell.name + ' deals', str(magic_damage), 'points of damage' + Bcolors.ENDC)
 
     enemy_choice = 1
     enemy_damage = enemy.generate_damage()
